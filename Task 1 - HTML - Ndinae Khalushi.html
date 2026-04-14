@@ -6,7 +6,7 @@
         <style>.block { background-color:gainsboro; padding:1em; } </style>
     </head>
     <body>
-        <h1>Ndinae - Task 1</h1>
+        <h1>NDINAE - Task 1</h1>
         <h2>My code:</h2>
         <p id="code" class="block"></p>
         <h2>Results of my code:</h2>
@@ -30,14 +30,26 @@
 
             //{# YOUR CODE HERE #}
 
+            //for-loop to iterate through each line of information in the JSON object
             for(var i = 0, size = data.length; i < size ; i++){
-                var a = data[i].page_id;
-                var b = new Date(data[i].creation_date);
-                var bMonth = b.toLocaleString("en-US",{month: "long"});
-                var bDay = b.toLocaleString("en-US",{day: "numeric"});
-                var bYear = b.toLocaleString("en-US",{year: "numeric"});
-                var c = data[i].title;
-                var resultText = `Article "${c}" (Page ID ${a}) was created at ${bMonth} ${bDay}, ${bYear}. <br>`
+                //extraction of the the page id
+                var pageId = data[i].page_id;
+
+                //extraction and formating of the creation date
+                var creationDate = new Date(data[i].creation_date);
+                var creationDateFormatted = creationDate.toLocaleDateString("en-US", {
+                    month: "long",
+                    day: "numeric",
+                    year: "numeric"
+                })
+
+                //exctraction of the title
+                var title = data[i].title;
+
+                //generating the resulting text with the specified format
+                var resultText = `Article "${title}" (Page ID ${pageId}) was created at ${creationDateFormatted}. <br>`
+
+                //adding each resulting line to the results element for display
                 document.getElementById("results").innerHTML += resultText
             }
         </script>
